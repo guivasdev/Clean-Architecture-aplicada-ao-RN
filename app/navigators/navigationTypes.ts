@@ -21,6 +21,7 @@ export type AppStackParamList = {
   Login: undefined
   Demo: NavigatorScreenParams<DemoTabParamList>
   // 🔥 Your screens go here
+  Converter: undefined
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
