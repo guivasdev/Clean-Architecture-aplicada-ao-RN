@@ -4,15 +4,10 @@ import type { ThemedStyle } from "@/theme/types"
 import { Text } from "@/components/Text"
 
 export interface ExchangeResultProps {
-  /**
-   * An optional style override useful for padding & margin.
-   */
+
   style?: StyleProp<ViewStyle>
 }
 
-/**
- * Describe your component here
- */
 export const ExchangeResult = (props: ExchangeResultProps) => {
   const { style } = props
   const $styles = [$container, style]
@@ -20,17 +15,14 @@ export const ExchangeResult = (props: ExchangeResultProps) => {
 
   return (
     <View style={$styles}>
-      <Text style={themed($text)}>Hello</Text>
+      <Text style={{ textAlign: 'center', marginTop: 10 }}>Resultado: {/*valor ants */} = {/*valor dps */}</Text>
     </View>
   )
 }
 
 const $container: ViewStyle = {
-  justifyContent: "center",
+  borderTopWidth: 1,
+  marginTop: 20
 }
 
-const $text: ThemedStyle<TextStyle> = ({ colors, typography }) => ({
-  fontFamily: typography.primary.normal,
-  fontSize: 14,
-  color: colors.palette.primary500,
-})
+

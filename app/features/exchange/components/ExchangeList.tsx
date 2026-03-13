@@ -1,7 +1,7 @@
-import { StyleProp, TextStyle, View, ViewStyle } from "react-native"
+import { StyleProp, View, ViewStyle } from "react-native"
 import { useAppTheme } from "@/theme/context"
-import type { ThemedStyle } from "@/theme/types"
-import { Text } from "@/components/Text"
+import { Button, List, TextInput } from "react-native-paper"
+
 
 export interface ExchangeListProps {
   /**
@@ -20,17 +20,34 @@ export const ExchangeList = (props: ExchangeListProps) => {
 
   return (
     <View style={$styles}>
-      <Text style={themed($text)}>Hello</Text>
+      <TextInput label="Valor" />
+
+      <List.Section title="De">
+        <List.Accordion
+          title="Uncontrolled Accordion"
+          left={props => <List.Icon {...props} icon="folder" />}>
+          <List.Item title="First item" />
+          <List.Item title="Second item" />
+        </List.Accordion>
+      </List.Section>
+
+      <List.Section title="Para">
+        <List.Accordion
+          title="Uncontrolled Accordion"
+          left={props => <List.Icon {...props} icon="folder" />}>
+          <List.Item title="First item" />
+          <List.Item title="Second item" />
+        </List.Accordion>
+      </List.Section>
+      <Button mode="contained-tonal" onPress={() => console.log('Pressed')}>
+        Press me
+      </Button>
+
     </View>
   )
 }
 
 const $container: ViewStyle = {
-  justifyContent: "center",
 }
 
-const $text: ThemedStyle<TextStyle> = ({ colors, typography }) => ({
-  fontFamily: typography.primary.normal,
-  fontSize: 14,
-  color: colors.palette.primary500,
-})
+

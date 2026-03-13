@@ -21,7 +21,8 @@ const AppStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
+        headerTitleAlign: "center",
         navigationBarColor: colors.background,
         contentStyle: {
           backgroundColor: colors.background,
