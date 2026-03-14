@@ -48,22 +48,22 @@ export const EpisodeProvider: FC<PropsWithChildren<EpisodeProviderProps>> = ({ c
 
   const toggleFavorite = useCallback(
     (episode: EpisodeItem) => {
-      if (favorites.some((fav) => fav === episode.guid)) {
-        setFavorites((prev) => prev.filter((fav) => fav !== episode.guid))
+      if (favorites.some((fav) => fav === episode.ask)) {
+        setFavorites((prev) => prev.filter((fav) => fav !== episode.ask))
       } else {
-        setFavorites((prev) => [...prev, episode.guid])
+        setFavorites((prev) => [...prev, episode.ask])
       }
     },
     [favorites],
   )
 
   const hasFavorite = useCallback(
-    (episode: EpisodeItem) => favorites.some((fav) => fav === episode.guid),
+    (episode: EpisodeItem) => favorites.some((fav) => fav === episode.ask),
     [favorites],
   )
 
   const episodesForList = useMemo(() => {
-    return favoritesOnly ? episodes.filter((episode) => favorites.includes(episode.guid)) : episodes
+    return favoritesOnly ? episodes.filter((episode) => favorites.includes(episode.ask)) : episodes
   }, [episodes, favorites, favoritesOnly])
 
   const value = {
@@ -94,7 +94,7 @@ export const useEpisode = (episode: EpisodeItem) => {
 
   let datePublished
   try {
-    const formatted = formatDate(episode.pubDate)
+    const formatted = formatDate(episode.ask)
     datePublished = {
       textLabel: formatted,
       accessibilityLabel: translate("demoPodcastListScreen:accessibility.publishLabel", {
@@ -105,7 +105,7 @@ export const useEpisode = (episode: EpisodeItem) => {
     datePublished = { textLabel: "", accessibilityLabel: "" }
   }
 
-  const seconds = Number(episode.enclosure?.duration ?? 0)
+  const seconds = Number(episode.ask ?? 0)
   const h = Math.floor(seconds / 3600)
   const m = Math.floor((seconds % 3600) / 60)
   const s = Math.floor((seconds % 3600) % 60)
@@ -118,7 +118,7 @@ export const useEpisode = (episode: EpisodeItem) => {
     }),
   }
 
-  const trimmedTitle = episode.title?.trim()
+  const trimmedTitle = episode.ask?.trim()
   const titleMatches = trimmedTitle?.match(/^(RNR.*\d)(?: - )(.*$)/)
   const parsedTitleAndSubtitle =
     titleMatches && titleMatches.length === 3

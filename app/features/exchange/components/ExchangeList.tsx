@@ -1,53 +1,35 @@
 import { StyleProp, View, ViewStyle } from "react-native"
 import { useAppTheme } from "@/theme/context"
-import { Button, List, TextInput } from "react-native-paper"
+import { Button, TextInput } from "react-native-paper"
+import { ExchangeItem } from "./ExchangeItem"
+import { useExchangeList } from "../hooks/useExchangeList"
 
 
 export interface ExchangeListProps {
-  /**
-   * An optional style override useful for padding & margin.
-   */
   style?: StyleProp<ViewStyle>
 }
 
-/**
- * Describe your component here
- */
 export const ExchangeList = (props: ExchangeListProps) => {
   const { style } = props
-  const $styles = [$container, style]
+  const $styles = [style]
   const { themed } = useAppTheme();
+
+  const { monetaryValue, setMonetaryValue, monetaryValidation,
+    mensage, typeCoinInit, setTypeCoinInit, typeCoinFinal, setTypeCoinFinal } = useExchangeList();
 
   return (
     <View style={$styles}>
-      <TextInput label="Valor" />
 
-      <List.Section title="De">
-        <List.Accordion
-          title="Uncontrolled Accordion"
-          left={props => <List.Icon {...props} icon="folder" />}>
-          <List.Item title="First item" />
-          <List.Item title="Second item" />
-        </List.Accordion>
-      </List.Section>
+      <TextInput label="Valor" value={monetaryValue} onChangeText={setMonetaryValue}
+        keyboardType="numeric" />
 
-      <List.Section title="Para">
-        <List.Accordion
-          title="Uncontrolled Accordion"
-          left={props => <List.Icon {...props} icon="folder" />}>
-          <List.Item title="First item" />
-          <List.Item title="Second item" />
-        </List.Accordion>
-      </List.Section>
-      <Button mode="contained-tonal" onPress={() => console.log('Pressed')}>
+      <ExchangeItem />
+
+      <Button mode="contained-tonal" onPress={() => monetaryValidation()}>
         Press me
       </Button>
 
     </View>
   )
 }
-
-const $container: ViewStyle = {
-}
-
 

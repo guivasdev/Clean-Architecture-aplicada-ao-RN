@@ -1,17 +1,9 @@
-/**
- * This Api class lets you define an API endpoint and methods to request
- * data and process it.
- *
- * See the [Backend API Integration](https://docs.infinite.red/ignite-cli/boilerplate/app/services/#backend-api-integration)
- * documentation for more details.
- */
 import { ApiResponse, ApisauceInstance, create } from "apisauce"
 
 import Config from "@/config"
-import type { EpisodeItem } from "@/services/api/types"
+import type { ApiConfig, ApiFeedResponse } from "@/services/api/types"
+import { GeneralApiProblem, getGeneralApiProblem } from "@/services/api/apiProblem"
 
-import { GeneralApiProblem, getGeneralApiProblem } from "./apiProblem"
-import type { ApiConfig, ApiFeedResponse } from "./types"
 
 /**
  * Configuring the apisauce instance.
@@ -46,20 +38,22 @@ export class Api {
   /**
    * Gets a list of recent React Native Radio episodes.
    */
-  async getEpisodes(): Promise<{ kind: "ok"; episodes: EpisodeItem[] } | GeneralApiProblem> {
+  async getEpisodes(): Promise<{ kind: "ok"; episodes: ApiFeedResponse[] } | GeneralApiProblem> {
     // make the api call
     const response: ApiResponse<ApiFeedResponse> = await this.apisauce.get(
-      `api.json?rss_url=https://economia.awesomeapi.com.br/json/last/:moedas`,
+      'https://br.dolarapi.com/v1/cotacoes/usd'
     )
 
+    console.log(response.data)
     // the typical ways to die when calling an api
     if (!response.ok) {
       const problem = getGeneralApiProblem(response)
       if (problem) return problem
     }
-
+    return { kind: "ok", episodes: [] }
     // transform the data into the format we are expecting
-    try {
+
+    /*try {
       const rawData = response.data
 
       // This is where we transform the data into the shape we expect for our model.
@@ -75,8 +69,11 @@ export class Api {
       }
       return { kind: "bad-data" }
     }
+      */
   }
 }
 
 // Singleton instance of the API for convenience
 export const api = new Api()
+
+//https://economia.awesomeapi.com.br/last/USD-BRL,

@@ -31,6 +31,7 @@ import { ThemeProvider } from "./theme/context"
 import { customFontsToLoad } from "./theme/typography"
 import { loadDateFnsLocale } from "./utils/formatDate"
 import * as storage from "./utils/storage"
+import { PaperProvider } from "react-native-paper"
 
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 
@@ -94,13 +95,15 @@ export function App() {
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <KeyboardProvider>
-          <ThemeProvider>
+        <ThemeProvider>
+          <PaperProvider>
             <AppNavigator
               linking={linking}
               initialState={initialNavigationState}
               onStateChange={onNavigationStateChange}
             />
-          </ThemeProvider>
+          </PaperProvider>
+        </ThemeProvider>
       </KeyboardProvider>
     </SafeAreaProvider>
   )

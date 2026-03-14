@@ -1,13 +1,8 @@
 import { FC } from "react"
-import { View, ViewStyle } from "react-native"
+import { ViewStyle } from "react-native"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { Screen } from "@/components/Screen"
-import { ExchangeList } from "@/features/exchange/components/ExchangeList"
-import { ExchangeItem } from "@/features/exchange/components/ExchangeItem"
-import { ExchangeResult } from "@/features/exchange/components/ExchangeResult"
-
-
-
+import { ExchangeList, ExchangeResult } from "@/features/exchange"
 
 interface ConverterScreenProps extends AppStackScreenProps<"Converter"> { }
 
